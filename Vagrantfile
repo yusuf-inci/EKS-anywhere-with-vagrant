@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
 
   # İkinci sanal makine - işçi düğümü
   config.vm.define "worker" do |worker|
-    worker.vm.box = "ubuntu/bionic64"
+    worker.vm.box = "ubuntu/focal64"
     worker.vm.network "private_network", ip: "192.168.50.11"
     worker.vm.provision "shell", inline: <<-SHELL
 
