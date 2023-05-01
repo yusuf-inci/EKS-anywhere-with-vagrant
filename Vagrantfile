@@ -23,12 +23,12 @@ Vagrant.configure("2") do |config|
       cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
       net.bridge.bridge-nf-call-ip6tables = 1
       net.bridge.bridge-nf-call-iptables = 1
-      EOF
+    EOF
       sudo sysctl --system
       cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.     conf
       net.bridge.bridge-nf-call-iptables  = 1
       net.bridge.bridge-nf-call-ip6tables = 1
-      EOF
+    EOF
       sudo sysctl --system
                                                                   
       sudo apt-get update && sudo apt-get install -y \
