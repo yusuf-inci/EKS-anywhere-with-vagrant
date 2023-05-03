@@ -24,6 +24,9 @@
 `docker ps`
 - Create a new tag for an existing image
 `docker tag my-app:v1 second-app:v1`
+- Build the Docker image and push it to Docker Hub
+ $ docker build -t <docker-username>/<image-name:tag> .
+ $ docker push <docker-username>/<image-name:tag>
 
 
 | Command              | Description                                                        |
