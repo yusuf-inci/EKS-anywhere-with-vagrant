@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: hello-world
-    image: us.icr.io/<my_namespace>/hello-world:1
+    image: docker.io/90041/myimage:v1
     ports:
     - containerPort: 8080
   imagePullSecrets:
