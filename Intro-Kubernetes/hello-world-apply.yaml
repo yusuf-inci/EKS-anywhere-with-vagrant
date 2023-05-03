@@ -21,7 +21,7 @@ spec:
         run: hello-world
     spec:
       containers:
-      - image: us.icr.io/<my_namespace>/hello-world:1
+      - image: us.icr.io/docker.io/90041/myimage:v1
         imagePullPolicy: Always
         name: hello-world
         ports:

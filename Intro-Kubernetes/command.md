@@ -14,4 +14,8 @@
 `kubectl describe pod hello-world`
 - Delete the Pod
 `kubectl delete pod hello-world`
+- Imperatively create a Pod using the provided configuration file
+`kubectl create -f hello-world-create.yaml`
+- Delete the Pod
+`kubectl delete pod hello-world`
 - 
