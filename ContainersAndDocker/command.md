@@ -1,29 +1,29 @@
 # Useful Command
 
 Verify that docker CLI is installed.
-'docker --version'
+`docker --version`
 Use the docker CLI to list your images.
-'docker images'
+`docker images`
 Pull your first image from Docker Hub.
-'docker pull hello-world'
+`docker pull hello-world`
 Run the hello-world image as a container.
-'docker run hello-world'
+`docker run hello-world`
 List the containers to see that your container ran and exited successfully.
-'docker ps -a'
+`docker ps -a`
 Remove specific container.
-'docker container rm <container_id>'
+`docker container rm <container_id>`
 Build the image using Dockerfile
-'docker build . -t myimage:v1'
+`docker build . -t myimage:v1`
 Run the image as a container.
-'docker run -dp 8080:8080 myimage:v1'
+`docker run -dp 8080:8080 myimage:v1`
 Run the curl command to ping the application as given below.
-'curl localhost:8080'
+`curl localhost:8080`
 Stop the container we use docker stop followed by the container id. The following command uses docker ps -q to pass in the list of all running containers:
-'docker stop $(docker ps -q)'
+`docker stop $(docker ps -q)`
 Check if the container has stopped
-'docker ps'
+`docker ps`
 Create a new tag for an existing image
-'docker tag my-app:v1 second-app:v1'
+`docker tag my-app:v1 second-app:v1`
 
 
 | Command              | Description                                                        |
