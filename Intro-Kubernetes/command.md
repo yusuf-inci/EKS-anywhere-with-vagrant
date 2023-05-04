@@ -1,4 +1,4 @@
-# Command
+# Commands
 
 - Get cluster information
 `kubectl config get-clusters`

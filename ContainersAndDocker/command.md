@@ -1,4 +1,4 @@
-# Command
+# Commands
 
 - Verify that docker CLI is installed.
 `docker --version`
