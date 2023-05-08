@@ -27,6 +27,7 @@
 - Build the Docker image and push it to Docker Hub
  $ docker build -t <docker-username>/<image-name:tag> .
  $ docker push <docker-username>/<image-name:tag>
+ // $ docker build -t 90041/myimage:v1 . && docker push 90041/myimage:v1
 
 
 | Command              | Description                                                        |

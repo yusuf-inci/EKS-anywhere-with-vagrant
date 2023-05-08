@@ -1,0 +1,6 @@
+# Commands
+
+- Build the Docker image and push it to Docker Hub
+ $ docker build -t <docker-username>/<image-name:tag> .
+ $ docker push <docker-username>/<image-name:tag>
+ // $ docker build -t 90041/hello-world:1 . && docker push 90041/hello-world:1
