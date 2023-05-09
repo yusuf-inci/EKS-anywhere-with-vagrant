@@ -1,6 +1,81 @@
 # Commands
 
+## Build and push application image to Docker Hub
 - Build the Docker image and push it to Docker Hub
- $ docker build -t <docker-username>/<image-name:tag> .
- $ docker push <docker-username>/<image-name:tag>
+`docker build -t <docker-username>/<image-name:tag> .`
+`$ docker push <docker-username>/<image-name:tag>`
  // $ docker build -t 90041/hello-world:1 . && docker push 90041/hello-world:1
+
+## Deploy the application to Kubernetes
+- Run the image as a Deployment
+`kubectl apply -f deployment.yaml`
+- List Pods until the status is “Running”
+`kubectl get pods`
+- In order to access the application, expose it to the internet via a Kubernetes Service. This creates a service of type ClusterIP
+`kubectl expose deployment/hello-world`
+- Cluster IPs are only accesible within the cluster. To make this externally accessible, we will create a proxy. Open a new terminal window, Run this command in the new terminal window since your environment variables need to be accessible in the original window for subsequent commands
+`kubectl proxy`
+- Go back to your original terminal window, ping the application to get a response
+`curl -L localhost:8001/api/v1/services/hello-world/proxy`
+
+## Scaling the application using a ReplicaSet
+In real-world situations, load on an application can vary over time. If our application begins experiencing heightened load, we want to scale it up to accommodate that load. There is a simple kubectl command for scaling.
+- Use the scale command to scale up your Deployment and Get Pods to ensure that there are now three Pods instead of just one. Make sure to run this in the terminal window that is not running the proxy command
+`kubectl scale deployment hello-world --replicas=3`
+`kubectl get pods`
+- Ping your application multiple times to ensure that Kubernetes is load-balancing across the replicas.
+`for i in `seq 10`; do curl -L localhost:8001/api/v1/services/hello-world/proxy; done`
+- to scale down your Deployment and check the Pods to see that two are deleted or being deleted
+`kubectl scale deployment hello-world --replicas=1 && kubectl get pods`
+
+## Perform rolling updates
+Rolling updates are an easy way to update our application in an automated and controlled fashion. To simulate an update, let’s first build a new version of our application and push it to Container Registry.
+- Edit app.js and change the welcome message from 'Hello world from ' + hostname + '! Your app is up and running!\n' to 'Welcome to ' + hostname + '! Your app is up and running!\n'. Make sure to save the file when you’re done. Build and push this new version to Container Registry. Update the tag to indicate that this is a second version of this application.
+ // $ docker build -t 90041/hello-world:2 . && docker push 90041/hello-world:2
+- List images in Container Registry to see all the different versions of this application that you have pushed so far. First login to Docker hub
+// $ docker login
+// $ docker images 90041/*
+- Update the deployment to use this version instead
+`kubectl set image deployment/hello-world hello-world=90041/hello-world:2`
+- Get a status of the rolling update
+`kubectl rollout status deployment/hello-world`
+- to see that the new tag is used for the image.
+`kubectl get deployments -o wide`
+- Ping your application to ensure that the new welcome message is displayed.
+`curl -L localhost:8001/api/v1/services/hello-world/proxy`
+- It’s possible that a new version of an application contains a bug. In that case, roll back the Deployment 
+`kubectl rollout undo deployment/hello-world`
+- Get a status of the rolling update
+`kubectl rollout status deployment/hello-world`
+- Get the Deployment with the wide option to see that the old tag is used
+`kubectl get deployments -o wide`
+- Ping your application to ensure that the earlier ‘Hello World..Your app is up & running!‘ message is displayed.
+`curl -L localhost:8001/api/v1/services/hello-world/proxy`
+
+## Using a ConfigMap to store configuration
+ConfigMaps and Secrets are used to store configuration information separate from the code so that nothing is hardcoded. It also lets the application pick up configuration changes without needing to be redeployed. To demonstrate this, we’ll store the application’s message in a ConfigMap so that the message can be updated simply by updating the ConfigMap.
+- Create a ConfigMap that contains a new message.
+`kubectl create configmap app-config --from-literal=MESSAGE="This message came from a ConfigMap!"`
+- open the app.js file, Edit the line: res.send('Welcome to ' + hostname + '! Your app is up and running!\n') with res.send(process.env.MESSAGE + '\n')and then build and push a new image that contains your new application code.
+// $ docker build -t 90041/hello-world:3 . && docker push 90041/hello-world:3
+- List images in Container Registry to see all the different versions of this application
+that you have pushed so far. First login to Docker hub
+// $ docker login
+// $ docker images 90041/*
+- The deployment-configmap-env-var.yaml file is already configured to use the tag 3. Now Apply the new Deployment configuration.
+`kubectl apply -f deployment-configmap-env-var.yaml`
+- Ping your application again to see if the message from the environment variable is returned.You should see the message, “This message came from a ConfigMap!”. Because the configuration is separate from the code, the message can be changed without rebuilding the image.
+`curl -L localhost:8001/api/v1/services/hello-world/proxy`
+- Delete the old ConfigMap and create a new one with the same name but a different message.
+`kubectl delete configmap app-config && kubectl create configmap app-config --from-literal=MESSAGE="This message is different, and you didn't have to rebuild the image!"`
+- Restart the Deployment so that the containers restart. This is necessary since the environment variables are set at start time.
+`kubectl rollout restart deployment hello-world`
+- Ping your application again to see if the new message from the environment variable is returned.
+`curl -L localhost:8001/api/v1/services/hello-world/proxy`
+- Delete the Deployment.
+`kubectl delete -f deployment-configmap-env-var.yaml`
+- Delete the Service
+`kubectl delete service hello-world`
+- Return to the other terminal window that is running the proxy command and kill it using Ctrl+C.
+
+
