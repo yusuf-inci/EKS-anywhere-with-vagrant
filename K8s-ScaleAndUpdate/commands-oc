@@ -1,0 +1,12 @@
+# Commands (Red Hat OpenShift)
+
+## Introduction
+- OpenShift projects are Kubernetes namespaces with additional administrative functions. Therefore, projects also provide isolation within an OpenShift cluster.
+- Verify that oc CLI is installed
+`oc version`
+- List the Pods in this namespace.
+`oc get pods`
+- In addition to Kubernetes objects, you can get OpenShift specific objects.
+`oc get buildconfigs`
+- View the OpenShift project that is currently in use.
+`oc project`
