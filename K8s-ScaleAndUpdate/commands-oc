@@ -10,3 +10,7 @@
 `oc get buildconfigs`
 - View the OpenShift project that is currently in use.
 `oc project`
+
+## OpenShift web console
+In addition to the CLI, OpenShift provides an intuitive web console. This is a useful and powerful feature because it enables you to deploy applications, view resources, monitor applications and view logs, and much more right in the console.
+- Notice the word “Administrator” at the top left. This indicates that you are in the Administrator perspective. There is also a Developer perspective. Each perspective provides workflows specific to that persona. Switch to the Developer perspective to begin deploying an application.
