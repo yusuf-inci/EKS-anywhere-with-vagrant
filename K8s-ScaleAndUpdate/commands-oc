@@ -14,3 +14,16 @@
 ## OpenShift web console
 In addition to the CLI, OpenShift provides an intuitive web console. This is a useful and powerful feature because it enables you to deploy applications, view resources, monitor applications and view logs, and much more right in the console.
 - Notice the word “Administrator” at the top left. This indicates that you are in the Administrator perspective. There is also a Developer perspective. Each perspective provides workflows specific to that persona. Switch to the Developer perspective to begin deploying an application.
+
+## Deploy an application in the web console
+The Developer perspective provides workflows specific to developer use cases, such as the ability to create and deploy applications.
+- to add a new application
+- Click the +Add button to add a new application
+- Select From Git among the options
+- You will be redirected to Import from Git window. OpenShift will deploy an application using only one input from you: the application source
+- In the Git Repo URL box, paste the sample one mentioned below
+`https://github.com/sclorg/nodejs-ex.git`
+- In the Builder section, scroll down to see the various builder images. We shall be using the Node.js image for our application. Ensure that this image has been selected
+- Keep the rest of the default options as they already are. Then scroll down and click Create
+- In the Topology view, you should now see your newly created application (NOTE: It will take several minutes for the application to appear. Refresh the browser if within 3 minutes, you don’t see any application)
+-  
