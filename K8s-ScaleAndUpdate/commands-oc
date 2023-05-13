@@ -26,4 +26,12 @@ The Developer perspective provides workflows specific to developer use cases, su
 - In the Builder section, scroll down to see the various builder images. We shall be using the Node.js image for our application. Ensure that this image has been selected
 - Keep the rest of the default options as they already are. Then scroll down and click Create
 - In the Topology view, you should now see your newly created application (NOTE: It will take several minutes for the application to appear. Refresh the browser if within 3 minutes, you don’t see any application)
--  
+
+##  View application in the web console
+ The Topology view provides quick links to a lot of important parts of an application:
+
+- The outer circle gets the information on the application.
+- The inner circle with the Node.js logo gives information about the Deployment.
+- The GitHub icon is used to access the code repository.
+- The check mark shows the most recent build (you will see circular arrows if the build is in progress).
+- The arrow coming out of a box can be used to view the application in the browser if the application is externally available.
