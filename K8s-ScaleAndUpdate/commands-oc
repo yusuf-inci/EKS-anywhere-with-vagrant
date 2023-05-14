@@ -35,3 +35,10 @@ The Developer perspective provides workflows specific to developer use cases, su
 - The GitHub icon is used to access the code repository.
 - The check mark shows the most recent build (you will see circular arrows if the build is in progress).
 - The arrow coming out of a box can be used to view the application in the browser if the application is externally available.
+- to bring up information on the Deployment: Click the inner circle with the Node.js logo. you will see four resources associated with this Deployment
+1. a Pod that runs the containerized application
+2. a Build that uses the s2i strategy to build the application into a container image
+3. a Service that exposes the application as a network service
+4. a Route that provides an externally reachable hostname.
+- to see logs: Click View logs on the line that says Build #1
+
