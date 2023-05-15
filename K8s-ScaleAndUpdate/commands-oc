@@ -41,4 +41,6 @@ The Developer perspective provides workflows specific to developer use cases, su
 3. a Service that exposes the application as a network service
 4. a Route that provides an externally reachable hostname.
 - to see logs: Click View logs on the line that says Build #1
-
+- to see a few key completed steps read the logs. For instance The repository is cloned, a Dockerfile is generated, an image is built, and the image is pushed to the internal registry.
+- Click the Details tab for this Build And then click the link under Owner (at the very bottom) that says BC (Build Config).
+- If you look at the Details and YAML tabs, you’ll see many concepts that we talked about in this module: triggers, build strategy, webhooks, and more.
