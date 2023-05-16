@@ -44,3 +44,6 @@ The Developer perspective provides workflows specific to developer use cases, su
 - to see a few key completed steps read the logs. For instance The repository is cloned, a Dockerfile is generated, an image is built, and the image is pushed to the internal registry.
 - Click the Details tab for this Build And then click the link under Owner (at the very bottom) that says BC (Build Config).
 - If you look at the Details and YAML tabs, you’ll see many concepts that we talked about in this module: triggers, build strategy, webhooks, and more.
+- On the Details tab, click the link under Output To that says IST (ImageStreamTag)
+- You can now see the ImageStreamTag that was created as an output of the build. Click the History tab to see the image in the internal registry to which this ImageStreamTag points.
+- Return to the Topology view and click on your Deployment info. Click the Route that OpenShift automatically created for you. This will open the application in the browser.
